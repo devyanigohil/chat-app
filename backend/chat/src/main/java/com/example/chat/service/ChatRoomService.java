@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.example.chat.dto.ChatMessageResponseDTO;
 import com.example.chat.dto.ChatRoomDTO;
+import com.example.chat.mapper.ChatMessageMapper;
 import com.example.chat.mapper.ChatRoomMapper;
 import com.example.chat.model.ChatRoom;
 import com.example.chat.model.User;
@@ -42,10 +44,18 @@ public class ChatRoomService {
 
     public List<ChatRoomDTO> getByCreatedBy(Principal principal){
         User user=userRepository.findByUsername(principal.getName());
-        List<ChatRoom> rooms=chatRoomRepository.findByCreatedby(user);
+        List<ChatRoom> rooms=chatRoomRepository.findByParticipantsContaining(user);
         return rooms.stream()
                      .map(room -> ChatRoomMapper.toDto(room,principal,userRepository))
                     .collect(Collectors.toList());
+    }
+
+    public List<ChatMessageResponseDTO> getMessages(String roomid) {
+        ChatRoom room = chatRoomRepository.findById(Long.parseLong(roomid))
+                .orElseThrow(() -> new RuntimeException("Room not found"));
+        return room.getMessages().stream()
+                .map(message -> ChatMessageMapper.toDto(message))
+                .collect(Collectors.toList());
     }
     // public ChatRoomDTO addUserToRoom(String roomname, String username){
     //     ChatRoom room=chatRoomRepository.findByName(roomname);

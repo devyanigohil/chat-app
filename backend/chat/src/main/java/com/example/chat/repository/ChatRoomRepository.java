@@ -18,4 +18,6 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom,Long>{
 
     List<ChatRoom> findByCreatedby(User user);
 
+    List<ChatRoom> findByParticipantsContaining(User user);
+
 }

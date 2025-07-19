@@ -19,7 +19,21 @@ function ChatRoom(){
 
   const handleReceive = (msg) => {
     setMessages((prev) => [...prev, msg]);
+    console.log("Received message:---->", msg);
   };
+
+    useEffect(() => {
+    if (room?.id) {
+      fetch(`http://localhost:8080/api/rooms/${room.id}/messages`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+        .then(res => res.json())
+        .then(data => setMessages(data))
+        .catch(err => console.error('Failed to fetch messages', err));
+    }
+  }, []);
 
   useEffect(() => {
     if (room && user) {
@@ -31,7 +45,7 @@ function ChatRoom(){
   const send = () => {
     if (msgInput.trim()) {
       setSender(user);
-      sendMessage({ user, content: msgInput,room:room?.id });
+      sendMessage({ sender:user, content: msgInput,room:room?.id });
       setMsgInput('');
     }
   };
@@ -49,9 +63,9 @@ function ChatRoom(){
         <h2>Room: {room?.name}</h2>
           <h2>Welcome, {user}!</h2>
                   
-                  
+          {room?.admin &&(        
           <button onClick={() => setShowInviteModal(true)}>➕ Add Users</button>
-
+          )}
             {showInviteModal && (
                           <InviteUsersModal roomId={room?.id} onClose={() => setShowInviteModal(false)} />
             )}
@@ -60,7 +74,7 @@ function ChatRoom(){
           <div style={{ height: 300, overflow: 'auto', border: '1px solid gray', marginBottom: 10 }}>
             {messages.map((m, i) => (
               <div key={i}>
-                <b>{m.user}:</b> {m.content}
+                <b>{m.sender}:</b> {m.content}
               </div>
             ))}
           </div>

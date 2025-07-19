@@ -31,7 +31,6 @@ export const connect = (onMessageReceived) => {
         };
   
 export const sendMessage = (msg) => {
-      console.log("room --->"+room);
 
     const token = localStorage.getItem('token');
 

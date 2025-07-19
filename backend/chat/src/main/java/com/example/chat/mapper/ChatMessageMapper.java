@@ -20,5 +20,12 @@ public class ChatMessageMapper {
 
         return msgres;
     }
+    public static ChatMessageResponseDTO toDto(ChatMessage msg) {
+        ChatMessageResponseDTO msgres = new ChatMessageResponseDTO();
+        msgres.setContent(msg.getContent());
+        msgres.setSender(msg.getSender().getUsername());
+        // msgres.setRoom(msg.getRoom().getId()); // Assuming you want to include room ID
+        return msgres;
+    }
 
 }
