@@ -47,8 +47,7 @@ public class FriendRequestService {
     }
 
     public List<FriendRequestDTO> getPendingRequests(String username) {
-        // Logic to retrieve pending friend requests for a user
-        // This could involve querying the database for FriendRequest entities
+       List<FriendRequest> requests = friendRequestRepository.findPendingRequests(username);
         return new ArrayList<FriendRequestDTO>();
     }
 }

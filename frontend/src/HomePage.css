@@ -1,0 +1,53 @@
+.homepage-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1; /* Make sure the background stays behind the content */
+}
+
+.homepage-container {
+  position: relative;
+  z-index: 1; /* Ensure content is above the background */
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  padding: 48px 32px;
+  min-width: 320px;
+  text-align: center;
+}
+.homepage-title {
+  margin-bottom: 24px;
+  color: #2193b0;
+}
+
+.homepage-desc {
+  margin-bottom: 32px;
+  color: #555;
+}
+
+.homepage-btn {
+  margin: 10px;
+  padding: 12px 32px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.homepage-btn.login {
+  background: #2193b0;
+  color: white;
+}
+
+.homepage-btn.register {
+  background: #6dd5ed;
+  color: #222;
+}

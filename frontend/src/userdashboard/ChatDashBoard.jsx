@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './css/ChatDashboard.css'; 
 import PendingRequestsSection from './PendingRequestsSection.jsx';
+import SendFriendRequestModal from './SendFriendRequestModal';
+
 
 
 function ChatDashboard() {
@@ -12,6 +14,7 @@ function ChatDashboard() {
   const [showModal, setShowModal] = useState(false);
   const [joinRequests, setJoinRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const [showFriendModal, setShowFriendModal] = useState(false);
   const navigate = useNavigate();
 
 
@@ -93,6 +96,7 @@ function ChatDashboard() {
 
   return (
     <div style={{ padding: 20 }}>
+ 
       <h2>Chat Dashboard</h2>
 
       <button onClick={() => setShowModal(true)}>➕ Create Room</button>
@@ -138,6 +142,10 @@ function ChatDashboard() {
       )} */}
 
 <PendingRequestsSection />
+     <button onClick={() => setShowFriendModal(true)}>🤝 Send Friend Request</button>
+      {showFriendModal && (
+        <SendFriendRequestModal onClose={() => setShowFriendModal(false)} />
+      )}
 
 
 
