@@ -4,6 +4,7 @@ import axios from 'axios';
 import './css/ChatDashboard.css'; 
 import PendingRequestsSection from './PendingRequestsSection.jsx';
 import SendFriendRequestModal from './SendFriendRequestModal';
+import PendingFriendRequestsSection from './PendingFriendRequestsSection.jsx';
 
 
 
@@ -142,6 +143,7 @@ function ChatDashboard() {
       )} */}
 
 <PendingRequestsSection />
+<PendingFriendRequestsSection />
      <button onClick={() => setShowFriendModal(true)}>🤝 Send Friend Request</button>
       {showFriendModal && (
         <SendFriendRequestModal onClose={() => setShowFriendModal(false)} />
@@ -155,7 +157,7 @@ function ChatDashboard() {
         <ul>
           {chatRooms.map((room) => (
             <li key={room.id}>
-              <strong>{room.name}</strong>: {room.description}
+              <strong>{room.name}</strong>
               <button onClick={() => handleJoin(room)}>Join</button>
             </li>
           ))}

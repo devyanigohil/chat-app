@@ -16,4 +16,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM users WHERE username LIKE CONCAT('%', ?1, '%') and username <> ?2" ,nativeQuery = true)
     List<User> getByUsername(String query,String username);
 
+    @Query(value = "SELECT * FROM users u " +
+        "WHERE u.username LIKE CONCAT('%', ?1, '%') " +
+        "AND u.username <> ?2 " +
+        "AND u.id NOT IN (" +
+        "  SELECT user_id FROM chatroom_users WHERE chatroom_id = ?3" +
+        ") " +
+        "AND u.id NOT IN (" +
+        "  SELECT recipient_id FROM join_request WHERE chat_room_id = ?3 AND handled = false" +
+        ")", nativeQuery = true)
+List<User> searchForChatRoomInvite(String query, String currentUsername, Long chatRoomId);
 }

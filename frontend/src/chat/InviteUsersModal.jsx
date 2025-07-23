@@ -17,7 +17,7 @@ const InviteUsersModal = ({ roomId, onClose }) => {
         return;
       }
       try {
-        const res = await axios.get(`http://localhost:8080/api/users/search?query=${searchTerm}`, {
+        const res = await axios.get(`http://localhost:8080/api/users/searchforChatRoomInvite?query=${searchTerm}&chatRoomId=${roomId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

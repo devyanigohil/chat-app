@@ -19,7 +19,6 @@ function ChatRoom(){
 
   const handleReceive = (msg) => {
     setMessages((prev) => [...prev, msg]);
-    console.log("Received message:---->", msg);
   };
 
     useEffect(() => {

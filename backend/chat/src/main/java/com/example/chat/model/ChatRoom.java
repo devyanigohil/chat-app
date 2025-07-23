@@ -1,14 +1,14 @@
 package com.example.chat.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -55,4 +55,12 @@ public class ChatRoom {
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<ChatMessage> messages;
+
+    public enum ChatRoomType {
+        GROUP,
+        PRIVATE
+    }
+
+    @Enumerated(EnumType.STRING)
+    private ChatRoomType type;
 }

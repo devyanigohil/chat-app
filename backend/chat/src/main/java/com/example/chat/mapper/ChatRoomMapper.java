@@ -18,9 +18,18 @@ public class ChatRoomMapper {
     public static ChatRoomDTO toDto(ChatRoom chatRoom, Principal principal, UserRepository userRepo){
         ChatRoomDTO chatRoomDTO=new ChatRoomDTO();
         chatRoomDTO.setDescription(chatRoom.getDescription());
-        chatRoomDTO.setName(chatRoom.getName());
         chatRoomDTO.setId(chatRoom.getId());
-        chatRoomDTO.setAdmin(chatRoom.getCreatedby().equals(userRepo.findByUsername(principal.getName())));
+        if(!chatRoom.getType().equals(ChatRoom.ChatRoomType.PRIVATE)){
+            chatRoomDTO.setName(chatRoom.getName());
+            chatRoomDTO.setAdmin(chatRoom.getCreatedby().equals(userRepo.findByUsername(principal.getName())));
+        }else{
+            chatRoomDTO.setName(chatRoom.getParticipants().stream()
+                .filter(user -> !user.getUsername().equals(principal.getName()))
+                .findFirst()
+                .map(user -> user.getUsername())
+                .orElse("Private Chat"));
+            chatRoomDTO.setAdmin(false);
+        }
         return chatRoomDTO;
     }
 }

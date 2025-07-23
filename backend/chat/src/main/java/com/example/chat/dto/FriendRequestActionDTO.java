@@ -5,8 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class JoinRequestActionDTO {
-    private Long requestId;
-    private boolean approve; 
-}
+public class FriendRequestActionDTO {
 
+    private Long requestId;
+    private boolean approve;
+
+}

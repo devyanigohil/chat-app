@@ -17,7 +17,7 @@ function SendFriendRequestModal({ onClose }) {
       try {
         const token = localStorage.getItem('token');
         const res = await axios.get(
-          `http://localhost:8080/api/users/search?query=${search}`,
+          `http://localhost:8080/api/users/searchforFriendRequest?query=${search}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setResults(res.data);
@@ -37,7 +37,8 @@ function SendFriendRequestModal({ onClose }) {
         { receiver: selectedUser.username, msg:message },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setStatus('Friend request sent!');
+      window.alert('Friend request sent!');
+      onClose(); 
     } catch (err) {
       setStatus('Failed to send request');
     }

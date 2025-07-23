@@ -33,6 +33,21 @@ public class JwtFilter extends OncePerRequestFilter  {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+    
+    //     String path = request.getRequestURI();
+
+
+    //     if (path.startsWith("/api/users/") &&
+    //         (path.endsWith("/loginuser") ||
+    //         path.endsWith("/sign-up") ||
+    //         path.endsWith("/send-otp") ||
+    //         path.endsWith("/verify-otp"))) {
+
+    //         filterChain.doFilter(request, response); // ✅ Allow the request to pass through
+    //         return;
+    //   }
+
+
 
             if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
                 response.setStatus(HttpServletResponse.SC_OK);

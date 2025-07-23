@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.chat.dto.JwtResponseDTO;
 import com.example.chat.dto.LoginRequestDTO;
+import com.example.chat.dto.OtpVerificationDTO;
 import com.example.chat.dto.UserDTO;
+import com.example.chat.service.OtpService;
 import com.example.chat.service.UserService;
 import com.example.chat.util.JwtUtil;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,11 +37,14 @@ public class UserController {
     private final JwtUtil jwtUtil;
 
     private final AuthenticationManager authenticationManager;
+
+    private final OtpService  otpService;
    
-    public UserController(UserService userService, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public UserController(UserService userService, AuthenticationManager authenticationManager, JwtUtil jwtUtil, OtpService otpService) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;
+        this.otpService = otpService;
     }
 
     @PostMapping("/sign-up")
@@ -64,11 +69,37 @@ public class UserController {
         }
     }
 
-    @GetMapping("/search")
+    @GetMapping("/searchforFriendRequest")
     public ResponseEntity<List<UserDTO>> searchUsers(@RequestParam String query, Principal principal) {
-        List<UserDTO> users=userService.searchUsers(query, principal.getName());
+        List<UserDTO> users=userService.searchUsersforFriendRequest(query, principal.getName());
         return ResponseEntity.ok().body(users);
     }
+    
+      @GetMapping("/searchforChatRoomInvite")
+    public ResponseEntity<List<UserDTO>> searchUsersChatRoomInvite(@RequestParam String query, Principal principal, @RequestParam String chatRoomId) {
+        List<UserDTO> users=userService.searchUsers(query, principal.getName(),Long.parseLong(chatRoomId));
+        return ResponseEntity.ok().body(users);
+    }
+
+    @GetMapping("/send-otp")
+    public ResponseEntity<String> sendOtptoUser(@RequestBody String email) {
+        if (otpService.generateAndSendOtp(email)) {
+          return ResponseEntity.ok("OTP sent!");
+        }
+        return ResponseEntity.status(500).body("Failed to send OTP");
+    }
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<String> verifyUserOtp(@RequestBody OtpVerificationDTO otpverifydto) {
+        
+        boolean isVerified = otpService.verifyOtp(otpverifydto);
+        if (isVerified) {
+            return ResponseEntity.ok("OTP verified successfully!");
+        } else {
+            return ResponseEntity.status(400).body("Invalid or expired OTP");
+        }
+    }
+    
     
     
 }
