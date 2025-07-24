@@ -15,6 +15,7 @@ import lombok.Setter;
 @Service
 @Getter
 @Setter
+@ConfigurationProperties(prefix = "spring.mail")
 public class EmailSender {
 
     @Autowired
@@ -37,7 +38,7 @@ public class EmailSender {
             emailSender.setUsername(username);
             emailSender.setPassword(password);
             emailSender.getJavaMailProperties().put("mail.smtp.auth", "true");
-            emailSender.getJavaMailProperties().put("mail.smtp.ssl.enable", "true");
+            emailSender.getJavaMailProperties().put("mail.smtp.starttls.enable", "true"); // Not ssl.enable
             emailSender.getJavaMailProperties().put("mail.smtp.ssl.checkserveridentity", "true");
             emailSender.getJavaMailProperties().put("mail.smtp.ssl.protocols", "TLSv1.2");
             emailSender.getJavaMailProperties().put("mail.smtp.ssl.trust", host);

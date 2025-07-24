@@ -25,12 +25,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .email-field {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-direction: row;
 }
 
 .email-field .register-input {
@@ -63,4 +65,10 @@
   cursor: pointer;
   transition: background 0.2s;
   white-space: nowrap;   /* Prevent button text from wrapping */
+}
+
+.error-msg {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
 }

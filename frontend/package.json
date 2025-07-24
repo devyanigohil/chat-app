@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "@stomp/stompjs": "^7.1.1",
     "axios": "^1.10.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.61.0",
     "react-router-dom": "^7.6.3",
-    "sockjs-client": "^1.6.1"
+    "sockjs-client": "^1.6.1",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",

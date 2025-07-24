@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.chat.dto.JwtResponseDTO;
 import com.example.chat.dto.LoginRequestDTO;
+import com.example.chat.dto.OtpRequestDTO;
 import com.example.chat.dto.OtpVerificationDTO;
 import com.example.chat.dto.UserDTO;
 import com.example.chat.service.OtpService;
@@ -81,9 +82,9 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    @GetMapping("/send-otp")
-    public ResponseEntity<String> sendOtptoUser(@RequestBody String email) {
-        if (otpService.generateAndSendOtp(email)) {
+    @PostMapping("/send-otp")
+    public ResponseEntity<String> sendOtptoUser(@RequestBody OtpRequestDTO email) {
+        if (otpService.generateAndSendOtp(email.getEmail())) {
           return ResponseEntity.ok("OTP sent!");
         }
         return ResponseEntity.status(500).body("Failed to send OTP");
