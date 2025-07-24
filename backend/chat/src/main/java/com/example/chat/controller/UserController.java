@@ -21,6 +21,7 @@ import com.example.chat.dto.LoginRequestDTO;
 import com.example.chat.dto.OtpRequestDTO;
 import com.example.chat.dto.OtpVerificationDTO;
 import com.example.chat.dto.UserDTO;
+import com.example.chat.model.User;
 import com.example.chat.service.OtpService;
 import com.example.chat.service.UserService;
 import com.example.chat.util.JwtUtil;
@@ -49,8 +50,17 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<UserDTO> signup(@RequestBody UserDTO userDTO) { 
-        return ResponseEntity.ok().body(userService.createUser(userDTO));
+    public ResponseEntity<String> signup(@RequestBody UserDTO userDTO) {
+        try {
+           String response = userService.createUser(userDTO);
+           if (response.startsWith("An account with this email") || response.startsWith("Username already taken")) {
+               return ResponseEntity.status(409).body(response);
+           }
+                   return ResponseEntity.ok("User registered successfully");
+
+        } catch (Exception e) {
+           return ResponseEntity.status(409).body(e.getMessage()); 
+        } 
     }
 
     @PostMapping("/loginuser")

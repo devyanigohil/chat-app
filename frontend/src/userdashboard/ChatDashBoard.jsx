@@ -78,6 +78,7 @@ function ChatDashboard() {
       setNewRoomName('');
       setNewRoomDescription('');
       setShowModal(false);
+      alert('Room created successfully!');
     } catch (err) {
       console.error('Error creating room:', err);
     }

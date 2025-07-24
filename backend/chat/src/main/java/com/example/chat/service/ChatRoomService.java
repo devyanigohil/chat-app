@@ -35,8 +35,10 @@ public class ChatRoomService {
         User user=userRepository.findByUsername(principal.getName());
         ChatRoom room=ChatRoomMapper.toModel(chatRoomDTO);
         room.setCreatedby(user);
+        room.setAdmin(user);
         room.setCreateddate(LocalDateTime.now());
         room.getParticipants().add(user);
+        room.setType(ChatRoom.ChatRoomType.GROUP);
         chatRoomRepository.save(room);
         return ChatRoomMapper.toDto(room,principal,userRepository);
     }

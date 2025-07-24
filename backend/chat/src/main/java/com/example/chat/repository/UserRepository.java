@@ -26,4 +26,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
         "  SELECT recipient_id FROM join_request WHERE chat_room_id = ?3 AND handled = false" +
         ")", nativeQuery = true)
 List<User> searchForChatRoomInvite(String query, String currentUsername, Long chatRoomId);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByUsername(String username);
+
+    User findByEmail(String email);
+
 }

@@ -23,7 +23,6 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Lo
         "  END " +
         "  FROM friend_request fr " +
         "  WHERE (fr.sender_id = ?3 OR fr.receiver_id = ?3) " +
-        "    AND fr.handled = true AND fr.accepted = true" +
         ")", nativeQuery = true)
     List<User> searchForFriendRequest(String query, String currentUsername, Long currentUserId);
    

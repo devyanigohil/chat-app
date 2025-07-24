@@ -71,10 +71,20 @@ function Register() {
       alert("Registration successful!");
       navigate("/");
     } catch (err) {
-      alert("Registration failed");
+    if (err.response && err.response.status === 409) {
+      const responseData = err.response.data;
+      if(responseData.includes("email")) {
+        alert(err.response.data || "Username or email already exists.");
+        localStorage.removeItem("otpVerified");
+        navigate("/login");
+    } else if(responseData.includes("Username")){
+        alert(err.response.data || "Username already exists.");
+    } else {
+       alert("Registration failed. Please try again.");
+    }
     }
   };
-
+  }
   return (
     <>
       <div className="register-bg"></div>
@@ -108,7 +118,7 @@ function Register() {
               className="register-btn otp-btn"
               type="button"
               onClick={handleVerifyOtp}
-              disabled={!getValues("otp")}
+              disabled={!getValues("otp")||otpVerified}
             >
               Verify OTP
             </button>
