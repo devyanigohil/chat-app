@@ -6,6 +6,8 @@ import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import javax.crypto.SecretKey;
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,14 +15,26 @@ public class JwtUtil {
 
         SecretKey secretKey = Keys.hmacShaKeyFor("jUohSTXqJ6dreJClcrWcx3kMz71EocfL".getBytes(StandardCharsets.UTF_8));
 
-        public String generateToken(String username) {
-        return Jwts.builder()
-                .subject(username)
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 1)) // 10 hours
-                .signWith(secretKey)
-                .compact();
-          }
+
+        public String generateAccessToken(String username) {
+            return generateToken(username, 15L * 60 * 1000); // 15 min
+        }
+
+        public String generateRefreshToken(String username) {
+            return generateToken(username, 7L * 24 * 60 * 60 * 1000); // 7 days
+        }
+
+
+        public String generateToken(String username, Long expirationTime) {
+            return Jwts.builder()
+                    .subject(username)
+                    .issuedAt(new Date())
+                    .expiration(new Date(System.currentTimeMillis() + expirationTime))
+                    .signWith(secretKey)
+                    .compact();
+        }
+       
+
 
         
         public String extractUsername(String token) {

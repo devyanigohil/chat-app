@@ -75,7 +75,6 @@ function Register() {
       const responseData = err.response.data;
       if(responseData.includes("email")) {
         alert(err.response.data || "Username or email already exists.");
-        localStorage.removeItem("otpVerified");
         navigate("/login");
     } else if(responseData.includes("Username")){
         alert(err.response.data || "Username already exists.");
