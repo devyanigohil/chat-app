@@ -29,7 +29,7 @@ const JoinRequestList = ({ joinRequests, onRequestClick }) => {
             <strong>{req.roomname}</strong> – {req.msg}
           </li>
         ))}
-      </ul>)};
+      </ul>)}
     </div>
   );
 };

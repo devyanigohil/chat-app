@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import com.example.chat.dto.ChatMessageRequestDTO;
 import com.example.chat.service.ChatService;
+import com.example.chat.util.JwtUtil;
 
 @Controller
 public class ChatContoller {
@@ -17,10 +18,13 @@ public class ChatContoller {
     
     private final SimpMessagingTemplate messagingTemplate;
 
+    private final JwtUtil jwtUtil;
 
-    public ChatContoller(ChatService chatService, SimpMessagingTemplate messagingTemplate) {
+
+    public ChatContoller(ChatService chatService, SimpMessagingTemplate messagingTemplate,JwtUtil jwtUtil) {
         this.chatService = chatService;
         this.messagingTemplate = messagingTemplate;
+        this.jwtUtil = jwtUtil;
     }
 
 
@@ -28,6 +32,7 @@ public class ChatContoller {
 
     @MessageMapping("/room/{roomId}")
     public void handleMessage(@DestinationVariable long roomId, ChatMessageRequestDTO msg, Principal principal){
+       
         chatService.saveMessage(msg,roomId,principal);
         messagingTemplate.convertAndSend("/topic/room/"+roomId, msg);
     }

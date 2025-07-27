@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../api/axiosInstance'; 
 import './css/ChatDashboard.css'; 
 import PendingRequestsSection from './PendingRequestsSection.jsx';
 import SendFriendRequestModal from './SendFriendRequestModal';
@@ -97,11 +97,25 @@ function ChatDashboard() {
   
 
   return (
-    <div style={{ padding: 20 }}>
- 
-      <h2>Chat Dashboard</h2>
+  <>
+      <div className="dashboard-bg"> </div>
+  <div className="logout-container">
 
-      <button onClick={() => setShowModal(true)}>➕ Create Room</button>
+ <button
+    className="homepage-btn logout"
+    onClick={() => {
+      localStorage.clear();
+      navigate('/');
+    }}
+  >
+    Logout
+  </button>
+  </div>
+<div className="chat-dashboard-container">
+ 
+  <h2 className="chat-dashboard-title">Chat Dashboard</h2>
+
+      <button className="create-room-btn" onClick={() => setShowModal(true)}>➕ Create Room</button>
 
       {/* Modal */}
       {showModal && (
@@ -145,7 +159,7 @@ function ChatDashboard() {
 
 <PendingRequestsSection />
 <PendingFriendRequestsSection />
-     <button onClick={() => setShowFriendModal(true)}>🤝 Send Friend Request</button>
+     <button className="friend-request-btn" onClick={() => setShowFriendModal(true)}>🤝 Send Friend Request</button>
       {showFriendModal && (
         <SendFriendRequestModal onClose={() => setShowFriendModal(false)} />
       )}
@@ -155,7 +169,7 @@ function ChatDashboard() {
       {/* Room List */}
       <div style={{ marginTop: 20 }}>
         <h3>Your Chat Rooms</h3>
-        <ul>
+        <ul  className="room-list">
           {chatRooms.map((room) => (
             <li key={room.id}>
               <strong>{room.name}</strong>
@@ -165,6 +179,7 @@ function ChatDashboard() {
         </ul>
       </div>
     </div>
+    </>
   );
 };
 

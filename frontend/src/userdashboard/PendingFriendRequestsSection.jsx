@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axiosInstance'; 
 import FriendRequestList from './FriendRequestList'; // You created this earlier
 import FriendRequestModal from './FriendRequestModal'; // Modal for accept/reject
 

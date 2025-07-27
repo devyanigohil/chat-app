@@ -8,25 +8,23 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.chat.dto.AuthResponseDTO;
 import com.example.chat.dto.JwtResponseDTO;
 import com.example.chat.dto.LoginRequestDTO;
 import com.example.chat.dto.OtpRequestDTO;
 import com.example.chat.dto.OtpVerificationDTO;
+import com.example.chat.dto.RefreshTokenDTO;
 import com.example.chat.dto.UserDTO;
-import com.example.chat.model.User;
 import com.example.chat.service.OtpService;
 import com.example.chat.service.UserService;
 import com.example.chat.util.JwtUtil;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 
@@ -64,7 +62,7 @@ public class UserController {
     }
 
     @PostMapping("/loginuser")
-    public ResponseEntity<JwtResponseDTO> login(@RequestBody LoginRequestDTO loginRequest) {
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -73,12 +71,30 @@ public class UserController {
                 )
             );
 
-            String token = jwtUtil.generateToken(loginRequest.getUsername());
-            return ResponseEntity.ok().body(new JwtResponseDTO(token));
+            String accesstoken = jwtUtil.generateAccessToken(loginRequest.getUsername());
+            String refreshtoken = jwtUtil.generateRefreshToken(loginRequest.getUsername());
+            AuthResponseDTO responseDTO=new AuthResponseDTO(accesstoken, refreshtoken);
+            return ResponseEntity.ok().body(responseDTO);
         } catch (AuthenticationException e) {
             throw new RuntimeException("Invalid credentials");
         }
     }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<JwtResponseDTO> refreshToken(@RequestBody RefreshTokenDTO refreshTokenDTO) {
+        
+        String refreshToken=refreshTokenDTO.getRefreshToken();
+
+        if(jwtUtil.isTokenExpired(refreshToken)) {
+            return ResponseEntity.status(401).body(new JwtResponseDTO("Refresh token expired"));
+        }
+        String username = jwtUtil.extractUsername(refreshToken);
+        String newAccessToken = jwtUtil.generateAccessToken(username);
+        JwtResponseDTO jwtResponseDTO = new JwtResponseDTO(newAccessToken);
+        
+        return ResponseEntity.ok(jwtResponseDTO);
+    }
+    
 
     @GetMapping("/searchforFriendRequest")
     public ResponseEntity<List<UserDTO>> searchUsers(@RequestParam String query, Principal principal) {

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
+import axios from '../api/axiosInstance'; 
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import './css/Register.css';
@@ -87,6 +87,7 @@ function Register() {
   return (
     <>
       <div className="register-bg"></div>
+          <button className="home-btn" onClick={() => navigate('/')}>Home</button>
       <div className="register-container">
         <h2 className="register-title">Register</h2>
 

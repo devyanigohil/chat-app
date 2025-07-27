@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import javax.crypto.SecretKey;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,11 +16,11 @@ public class JwtUtil {
 
 
         public String generateAccessToken(String username) {
-            return generateToken(username, 15L * 60 * 1000); // 15 min
+            return generateToken(username, 3L * 60 * 1000); // 20 min
         }
 
         public String generateRefreshToken(String username) {
-            return generateToken(username, 7L * 24 * 60 * 60 * 1000); // 7 days
+            return generateToken(username, 3L* 60 * 60 * 1000); // 3 hours
         }
 
 
@@ -48,7 +47,7 @@ public class JwtUtil {
             return username.equals(expectedUsername) && !isTokenExpired(token);
         }
 
-       private boolean isTokenExpired(String token) {
+       public boolean isTokenExpired(String token) {
         JwtParser parser = Jwts.parser().verifyWith(secretKey).build();
         Date expiration = parser.parseSignedClaims(token).getPayload().getExpiration();
         return expiration.before(new Date());

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-//import './InviteUsersModal.css'; // optional for modal styling
+import axios from '../api/axiosInstance'; 
+//import './InviteUsersModal.css'; 
 
 const InviteUsersModal = ({ roomId, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');

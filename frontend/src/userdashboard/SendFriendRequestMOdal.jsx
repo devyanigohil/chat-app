@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axiosInstance'; 
 
 function SendFriendRequestModal({ onClose }) {
   const [search, setSearch] = useState('');

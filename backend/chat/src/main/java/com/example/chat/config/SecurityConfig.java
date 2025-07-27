@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .formLogin(form -> form.disable())
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()  // ✅ allow CORS preflight
-                .requestMatchers("/api/users/sign-up","/api/users/loginuser","api/users/verify-otp","/api/users/send-otp").permitAll()
+                .requestMatchers("/api/users/sign-up","/api/users/loginuser","api/users/verify-otp","/api/users/send-otp","/api/users/refresh-token").permitAll()
                 .requestMatchers("/chat/**").permitAll()
                 .requestMatchers("/api/requests/**").authenticated()
                 .anyRequest().authenticated())
