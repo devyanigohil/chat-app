@@ -45,18 +45,47 @@ function ChatRoom(){
   }, [room, user]);
 
   const send = () => {
-    if (msgInput.trim()) {
+    try{
+      if (msgInput.trim()) {
       setSender(user);
       sendMessage({ sender:user, content: msgInput,room:room?.id });
       setMsgInput('');
+      }
+    }catch (error) {
+      connect(handleReceive); // Reconnect if there's an error
     }
+  
   };
 
     if (!isAuthenticated) {
     return <Login onLogin={() => setIsAuthenticated(true)} />;
   }
   
-          
+  const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  const formatTime = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString(undefined, {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  const groupedMessages = messages.reduce((acc, msg) => {
+    const dateKey = formatDate(msg.timestamp);
+    if (!acc[dateKey]) acc[dateKey] = [];
+    acc[dateKey].push(msg);
+    return acc;
+  }, {});
+            
 
 
 return (
@@ -94,13 +123,20 @@ return (
         <InviteUsersModal roomId={room?.id} onClose={() => setShowInviteModal(false)} />
       )}
 
-      <div className="message-box">
-        {messages.map((m, i) => (
-          <div className="message" key={i}>
-            <b>{m.sender}:</b> {m.content}
+       <div className="message-box">
+        {Object.entries(groupedMessages).map(([date, msgs]) => (
+          <div key={date}>
+            <div className="date-header">{date}</div>
+            {msgs.map((m, i) => (
+              <div className="message" key={i}>
+                <span className="timestamp">[{formatTime(m.timestamp)}]</span>
+                <b>{m.sender}:</b> {m.content}
+              </div>
+            ))}
           </div>
         ))}
       </div>
+
 
       <div className="input-section">
         <input

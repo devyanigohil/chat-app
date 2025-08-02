@@ -16,6 +16,7 @@ public class ChatMessageMapper {
         ChatMessageResponseDTO msgres=new ChatMessageResponseDTO();
         msgres.setContent(msg.getContent());
          msgres.setSender(sender);
+         msgres.setTimestamp(msg.getTimestamp());
         // msgres.setRoom(msg.getRoom());
 
         return msgres;
@@ -24,6 +25,7 @@ public class ChatMessageMapper {
         ChatMessageResponseDTO msgres = new ChatMessageResponseDTO();
         msgres.setContent(msg.getContent());
         msgres.setSender(msg.getSender().getUsername());
+        msgres.setTimestamp(msg.getTimestamp());
         // msgres.setRoom(msg.getRoom().getId()); // Assuming you want to include room ID
         return msgres;
     }

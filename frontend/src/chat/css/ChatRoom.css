@@ -121,3 +121,18 @@ button:disabled {
   gap: 10px;
   z-index: 10;
 }
+
+.date-header {
+  text-align: center;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #555;
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+}
+
+.timestamp {
+  color: gray;
+  margin-right: 5px;
+  font-size: 0.9em;
+}

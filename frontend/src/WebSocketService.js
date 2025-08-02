@@ -1,10 +1,12 @@
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 import { refreshAccessToken } from './TokenService.js';
+
 let stompClient = null;
   const room=JSON.parse(localStorage.getItem("room"));
 
 export const connect = async (onMessageReceived) => {
+  debugger
     let token = localStorage.getItem('token');
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
@@ -50,10 +52,9 @@ export const connect = async (onMessageReceived) => {
     },
         });
         stompClient.activate();
-        };
+ };
   
 export const sendMessage = (msg) => {
-
     const token = localStorage.getItem('token');
     if (stompClient && stompClient.connected)  {
         stompClient.publish({
