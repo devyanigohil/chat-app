@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from '../api/axiosInstance'; 
 import './css/ChatDashboard.css'; 
 import PendingRequestsSection from './PendingRequestsSection.jsx';
-import SendFriendRequestModal from './SendFriendRequestModal';
+import SendFriendRequestModal from './SendFriendRequestModal.jsx';
 import PendingFriendRequestsSection from './PendingFriendRequestsSection.jsx';
 
 
@@ -16,6 +16,7 @@ function ChatDashboard() {
   const [joinRequests, setJoinRequests] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [showFriendModal, setShowFriendModal] = useState(false);
+  const username = localStorage.getItem('username');
   const navigate = useNavigate();
 
 
@@ -98,24 +99,16 @@ function ChatDashboard() {
 
   return (
   <>
-      <div className="dashboard-bg"> </div>
+  <div className="dashboard-bg"> </div>
   <div className="logout-container">
 
- <button
-    className="homepage-btn logout"
-    onClick={() => {
-      localStorage.clear();
-      navigate('/');
-    }}
-  >
-    Logout
-  </button>
+  <button className="homepage-btn logout" onClick={() => { localStorage.clear(); navigate('/');   }}>
+      Logout
+    </button>
   </div>
-<div className="chat-dashboard-container">
+  <div className="chat-dashboard-container">
  
-  <h2 className="chat-dashboard-title">Chat Dashboard</h2>
-
-      <button className="create-room-btn" onClick={() => setShowModal(true)}>➕ Create Room</button>
+   <h2 className="chat-dashboard-title">Hello, {username}</h2>
 
       {/* Modal */}
       {showModal && (
@@ -129,7 +122,7 @@ function ChatDashboard() {
               onChange={(e) => setNewRoomName(e.target.value)}
             />
             <textarea
-              placeholder="Room Description"
+              placeholder="Room Description (Optional)"
               value={newRoomDescription}
               onChange={(e) => setNewRoomDescription(e.target.value)}
             />
@@ -141,34 +134,23 @@ function ChatDashboard() {
         </div>
       )}
 
-
-     { /*Pending join Requests */}
-          {/* <JoinRequestList
-        joinRequests={joinRequests}
-        onRequestClick={(req) => setSelectedRequest(req)}
-      />
-
-      {selectedRequest && (
-        <JoinRequestModal
-          request={selectedRequest}
-          onAccept={handleAccept}
-          onReject={handleReject}
-          onClose={() => setSelectedRequest(null)}
-        />
-      )} */}
-
-<PendingRequestsSection />
-<PendingFriendRequestsSection />
-     <button className="friend-request-btn" onClick={() => setShowFriendModal(true)}>🤝 Send Friend Request</button>
       {showFriendModal && (
-        <SendFriendRequestModal onClose={() => setShowFriendModal(false)} />
-      )}
+            <SendFriendRequestModal onClose={() => setShowFriendModal(false)} />
+          )}
 
-
-
-      {/* Room List */}
-      <div style={{ marginTop: 20 }}>
-        <h3>Your Chat Rooms</h3>
+          {/* Room List */}
+        <div style={{ marginTop: 20 }} className='chatroom-header'>
+          <h2 className='chatroom-title'>Your Chat Rooms</h2>
+          <div className="dropdown-container">
+            <button className="dropdown-toggle">⚙️ Actions</button>
+            <div className="dropdown-menu">
+              <button onClick={() => setShowModal(true)}>➕ Create Room</button>
+              <PendingRequestsSection />
+            <PendingFriendRequestsSection />
+              <button onClick={() => setShowFriendModal(true)}>💌 Send Friend Request</button>
+            </div>
+          </div>
+        </div>
         <ul  className="room-list">
           {chatRooms.map((room) => (
             <li key={room.id}>
@@ -177,8 +159,7 @@ function ChatDashboard() {
             </li>
           ))}
         </ul>
-      </div>
-    </div>
+  </div>
     </>
   );
 };

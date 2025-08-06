@@ -36,7 +36,7 @@ function Login({ onLogin }) {  // <-- Accept onLogin as prop
       <div className="login-bg"></div>
       <button className="home-btn" onClick={() => navigate('/')}>Home</button>
       <div className="login-container">
-        <h2 className="login-title">Login</h2>
+        <h2 className="login-title">Enter your Credentials here</h2>
         <div className="login-field">
           <input className="login-input" placeholder="Username" value={username} onChange={e => setname(e.target.value)} />
         </div>
@@ -44,10 +44,7 @@ function Login({ onLogin }) {  // <-- Accept onLogin as prop
           <input className="login-input" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
         </div>
         <button className="login-btn" onClick={handleLogin}>Login</button><br />
-        Don't have an account?
-        <button className="register-link-btn" onClick={() => navigate('/signup')}>
-          Register
-        </button>
+        Don't have an account? <button className="register-link-btn" onClick={() => navigate('/signup')}>register here </button>
       </div>
     </>
   );

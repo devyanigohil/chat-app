@@ -26,7 +26,9 @@ const PendingFriendRequestsSection = () => {
     fetchFriendRequests();
   }, [showModal]);
 
-  const handleSelectRequest = (req) => setSelectedRequest(req);
+  const handleSelectRequest = (req) => {
+                              setSelectedRequest(req);
+                              setShowModal(false);}
 
   const handleAccept = async (req) => {
      const confirmed = window.confirm("Are you sure you want to accept this friend request?");

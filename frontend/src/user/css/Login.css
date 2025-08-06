@@ -1,95 +1,96 @@
-/* Login.css */
-
+/* Background to match the cozy-homepage */
 .login-bg {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100vw;
+  background-image: url('../../assets/bgimage.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
   z-index: -1;
 }
 
+/* Main login box */
 .login-container {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  padding: 40px 32px;
-  min-width: 360px;
-  max-width: 480px;
+  width: 400px;
+  margin: 100px auto;
+  background: #fffdf9;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
+/* Title Styling */
 .login-title {
-  font-size: 28px;
-  margin-bottom: 24px;
-  color: #333;
-}
-
-.login-field {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-size: 1.7rem;
+  margin-bottom: 25px;
+  color: #5a3e36;
+  font-family: 'Georgia', serif;
 }
 
 .login-input {
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #b0c4de;
-  font-size: 16px;
-  width: 75%;
+  display: block;
+  width: 100%;
+  padding: 12px 12px 12px 20px; /* top, right, bottom, left */
+  margin: 10px auto;
+  border: 1px solid #e7a977;
+  border-radius: 10px;
+  background: #fffaf3;
+  font-size: 1rem;
+  font-family: 'Georgia', serif;
+  box-sizing: border-box;
 }
 
+/* Button styles */
 .login-btn {
-  padding: 10px 24px;
-  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 1rem;
   border: none;
-  background-color: #2193b0;
+  border-radius: 30px;
+  background-color: #e7a977;
   color: white;
-  font-weight: bold;
-  font-size: 16px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease-in-out;
+  margin-top: 15px;
 }
 
 .login-btn:hover {
-  background-color: #197b9b;
+  background-color: #d88c54;
 }
 
+/* Home button on top */
 .home-btn {
-  position: absolute;
+  position: fixed;       /* Sticks to the viewport */
   top: 20px;
-  right: 30px;
-  padding: 8px 16px;
-  background-color: #2193b0;
-  color: white;
-  border: none;
-  border-radius: 8px;
+  right: 20px;           /* Top-right corner */
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid #e7a977;
+  background: #fff4e6;
+  color: #a45c3f;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
-  z-index: 1;
+  z-index: 10;
 }
+
 
 .home-btn:hover {
-  background-color: #186f8c;
+  background-color: #ffe7cf;
 }
 
+/* Register link */
 .register-link-btn {
-  margin-top: 16px;
   background: none;
   border: none;
-  color: #2193b0;
-  font-size: 14px;
-  text-decoration: underline;
+  color: #a45c3f;
+  font-weight: bold;
+  margin-top: 10px;
   cursor: pointer;
-  transition: color 0.2s;
+  text-decoration: underline;
 }
 
 .register-link-btn:hover {
-  color: #186f8c;
+  color: #7b3e2d;
 }

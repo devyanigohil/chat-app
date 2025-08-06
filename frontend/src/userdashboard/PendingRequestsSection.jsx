@@ -35,6 +35,7 @@ const PendingRequestsSection = () => {
   const handleSelectRoom = (req) => {
     // const req = requests.find(r => r.roomname === roomName);
     setSelectedRequest(req);
+    setShowModal(false);
   };
 
   const handleAccept = async (req) => {

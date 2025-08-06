@@ -75,7 +75,9 @@ function SendFriendRequestModal({ onClose }) {
             <button onClick={handleSendRequest}>Send Request</button>
           </>
         )}
-        <button onClick={onClose}>Close</button>
+         <div className="modal-buttons">
+          <button style={{width:"1px"}} onClick={onClose}>Close</button>
+        </div>
         {status && <div>{status}</div>}
       </div>
     </div>

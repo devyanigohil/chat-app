@@ -90,21 +90,15 @@ function ChatRoom(){
 
 return (
   <>
-  <div className="chatroom-wrapper"></div>
-<div className="top-right-btn-container">
-  <button className="homepage-btn login" onClick={() => navigate('/dashboard')}>
-    Dashboard
-  </button>
-  <button
-    className="homepage-btn logout"
-    onClick={() => {
-      localStorage.clear();
-      navigate('/');
-    }}
-  >
-    Logout
-  </button>
-</div>
+    <div className="chatroom-wrapper"></div>
+    <div className="top-right-btn-container">
+      <button className="homepage-btn dashboard" onClick={() => navigate('/dashboard')}>
+        Dashboard
+      </button>
+      <button className="homepage-btn logout" onClick={() => { localStorage.clear(); navigate('/');  }}>
+        Logout
+      </button>
+    </div>
 
 
     <div className="chatroom-container">
@@ -130,10 +124,10 @@ return (
             {msgs.map((m, i) => (
               <div className="message" key={i}>
                 <span className="timestamp">[{formatTime(m.timestamp)}]</span>
-                <b>{m.sender}:</b> {m.content}
+                <b className='msg-sender'>{m.sender}:</b> <span className='msg-text'> {m.content}</span>
               </div>
             ))}
-          </div>
+            </div>
         ))}
       </div>
 
@@ -144,7 +138,7 @@ return (
           value={msgInput}
           onChange={(e) => setMsgInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && send()}
-          placeholder="Type your message..."
+          placeholder="Type your message..." type='text'
         />
         <button className="chatroom-btn" onClick={send} disabled={!msgInput.trim()}>
           Send

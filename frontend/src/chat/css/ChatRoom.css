@@ -5,26 +5,29 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+  background: url('../../assets/bgimage3.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: auto;
   z-index: -1;
-
 }
 
 /* Container */
 .chatroom-container {
-   background: white;
+  background: rgba(255, 250, 240, 0.96); /* soft warm cream */
   border-radius: 16px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0b788; /* warm tan border */
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
   width: 1000px;
   max-width: 90%;
   padding: 40px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  font-family: 'Georgia', serif; /* elegant serif to match theme */
 }
 
 /* Top Navigation */
@@ -35,19 +38,30 @@
 }
 
 .chatroom-btn {
-  background-color: #1976d2;
-  color: white;
+  padding: 8px 16px;
+  margin: 10px 6px;
   border: none;
-  padding: 10px 24px;
-  font-size: 15px;
-  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #333;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .chatroom-btn:hover {
-  background-color: #145ea8;
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(1.03);
 }
+
+.chatroom-btn:disabled {
+  background-color: rgba(200, 200, 200, 0.6);
+  cursor: not-allowed;
+  color: #888;
+}
+
 
 /* Header Info */
 .chatroom-header {
@@ -56,62 +70,94 @@
   align-items: center;
 }
 
-/* Chat Messages */
-.message-box {
-  height: 400px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-  padding: 16px;
-  border-radius: 10px;
-  background-color: #f5f9fc;
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-}
 
-.message {
-  margin-bottom: 12px;
-}
 
-.message b {
-  color: #1976d2;
-}
-
-/* Input + Send Button */
 .input-section {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 10px;
+  gap: 10px;
 }
 
-.chat-input {
+.input-section input[type="text"] {
   flex: 1;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid #b0c4de;
-  font-size: 16px;
+  padding: 12px;
+  border: 1px solid #e0b788;
+  border-radius: 6px;
+  background: #fffaf0;
+  font-family: 'Georgia', serif;
 }
 
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.homepage-btn {
-  margin: 10px;
-  padding: 12px 32px;
-  border-radius: 8px;
-  border: none;
-  font-weight: bold;
-  font-size: 18px;
+.input-section button {
+  padding: 12px 20px;
+  background-color: #d98e04; /* warm mustard */
+  color: #fffaf3;
+  border: 1px solid #b45f04;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.3s ease;
 }
 
-.homepage-btn.logout {
-  background: #ff4d4f; /* soft red */
-  color: white;
+.input-section button:hover {
+  background-color: #b45f04;
 }
+
+
+.message-box {
+ max-height: 400px; /* Or whatever you prefer */
+  overflow-y: auto;
+  background: rgba(255, 250, 240, 0.95);
+  border: 1px solid #d9b27e;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  font-family: 'Georgia', serif;
+}
+
+/* Each date group */
+.date-header {
+  text-align: center;
+  font-weight: bold;
+  color: #555;
+  margin: 20px 0 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+/* Each message item */
+.message {
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 2px;
+  transition: background-color 0.2s ease;
+}
+
+/* On hover, slightly highlight the message */
+.message:hover {
+  background-color: #fef3dc;
+}
+
+/* Author name styling */
+.msg-sender {
+  font-weight: bold;
+  color: #b45f04;
+  margin-bottom: 4px;
+  margin-left: 10px;
+}
+
+/* Message text styling */
+.msg-text {
+  color: #333;
+  margin-bottom: 4px;
+  word-wrap: break-word;
+}
+
+/* Timestamp styling */
+.timestamp {
+  font-size: 0.85rem;
+  color: #777;
+  text-align: right;
+}
+
 
 .top-right-btn-container {
   position: absolute;
@@ -122,17 +168,29 @@ button:disabled {
   z-index: 10;
 }
 
-.date-header {
-  text-align: center;
-  font-weight: bold;
-  margin: 10px 0;
-  color: #555;
-  border-top: 1px solid #ccc;
-  padding-top: 5px;
+/* Unified cozy look for both buttons */
+.homepage-btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  background-color: #d98e04; /* mustard */
+  color: #fffaf3;
+  border: 1px solid #b45f04;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.timestamp {
-  color: gray;
-  margin-right: 5px;
-  font-size: 0.9em;
+
+/* Optional subtle hover effect */
+.homepage-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(1.03);
 }
+
+/* Optional color variation for logout if you still want a slight red tone */
+.homepage-btn.logout {
+  color: #b30000;
+}
+

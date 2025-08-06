@@ -89,46 +89,37 @@ function Register() {
       <div className="register-bg"></div>
           <button className="home-btn" onClick={() => navigate('/')}>Home</button>
       <div className="register-container">
-        <h2 className="register-title">Register</h2>
+        <h2 className="register-title">Register here</h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="register-field">
             <input className="register-input" placeholder="Name" {...register("name")} />
-            <p className="error-msg">{errors.name?.message}</p>
           </div>
+            <p className="error-msg">{errors.name?.message}</p>
 
-          <div className="register-field email-field">
-              <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+          {/* EMAIL + SEND OTP */}
+          <div className="row-field">
             <input className="register-input" placeholder="Email" {...register("email")} />
-                        <p className="error-msg">{errors.email?.message}</p>
-              </div>
-            <button
-              className="register-btn otp-btn"
-              type="button"
-              onClick={handleSendOtp}
-              disabled={otpSent}
-            >
+            <button className="register-btn otp-btn" type="button" onClick={handleSendOtp} disabled={otpSent}>
               Send OTP
             </button>
           </div>
+          <p className="error-msg">{errors.email?.message}</p>
 
-          <div className="register-field email-field">
+          {/* OTP + VERIFY */}
+          <div className="row-field">
             <input className="register-input" placeholder="OTP" {...register("otp")} />
-            <button
-              className="register-btn otp-btn"
-              type="button"
-              onClick={handleVerifyOtp}
-              disabled={!getValues("otp")||otpVerified}
-            >
+            <button className="register-btn otp-btn" type="button"  onClick={handleVerifyOtp} disabled={!getValues("otp") || otpVerified} >
               Verify OTP
             </button>
-            <p className="error-msg">{errors.otp?.message}</p>
           </div>
+          <p className="error-msg">{errors.otp?.message}</p>
+
 
           <div className="register-field">
             <input className="register-input" placeholder="Username" {...register("username")} />
-            <p className="error-msg">{errors.username?.message}</p>
           </div>
+          <p className="error-msg">{errors.username?.message}</p>
 
           <div className="register-field">
             <input
@@ -137,8 +128,8 @@ function Register() {
               placeholder="Password"
               {...register("password")}
             />
-            <p className="error-msg">{errors.password?.message}</p>
           </div>
+            <p className="error-msg">{errors.password?.message}</p>
 
           <button className="register-btn main-btn" type="submit" disabled={!otpVerified}>
             Register

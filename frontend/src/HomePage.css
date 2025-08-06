@@ -1,53 +1,87 @@
-.homepage-bg {
-  position: fixed;
-  top: 0;
+.cozy-homepage {
   left: 0;
-  width: 100vw;
+  top: 0;
   height: 100vh;
-  background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+  width: 100%;
+  font-family: 'Georgia', serif;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  z-index: -1; /* Make sure the background stays behind the content */
+  padding: 40px 20px;
+  position: absolute;
+  overflow: hidden;
+  background-image: url('assets/bgimage.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+   flex: 1;
 }
 
-.homepage-container {
-  position: relative;
-  z-index: 1; /* Ensure content is above the background */
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-  padding: 48px 32px;
-  min-width: 320px;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* <-- This is important */
+}
+
+.welcome-box {
+  height: 500px;
+  width: 800px;
+  background: #fffdf9;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
-.homepage-title {
-  margin-bottom: 24px;
-  color: #2193b0;
+
+.title {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  color: #5a3e36;
 }
 
-.homepage-desc {
-  margin-bottom: 32px;
-  color: #555;
+.intro-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #5b463b;
 }
 
-.homepage-btn {
-  margin: 10px;
-  padding: 12px 32px;
-  border-radius: 8px;
+.button-group {
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 12px 28px;
+  font-size: 1rem;
   border: none;
-  font-weight: bold;
-  font-size: 18px;
+  border-radius: 30px;
+  margin: 10px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease-in-out;
 }
 
-.homepage-btn.login {
-  background: #2193b0;
+.btn.primary {
+  background-color: #e7a977;
   color: white;
 }
 
-.homepage-btn.register {
-  background: #6dd5ed;
-  color: #222;
+.btn.primary:hover {
+  background-color: #d88c54;
+}
+
+.btn.secondary {
+  background-color: #fff4e6;
+  color: #a45c3f;
+  border: 1px solid #e7a977;
+}
+
+.btn.secondary:hover {
+  background-color: #ffe7cf;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #987c66;
+  text-align: center;
 }
