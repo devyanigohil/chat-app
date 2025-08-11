@@ -1,19 +1,6 @@
 
 A real-time chat application built with **Spring Boot** (backend) and **React** (frontend), supporting **dynamic chat rooms**, **private messaging**, and **JWT-secured WebSocket communication**.
 
-### Screenshot 1: Home Screen
-![Home Page](assests/home.png)
-### Screenshot 2: Login Screen
-![Login Page](assests/login.png)
-### Screenshot 3: Register Screen
-![Register Page](assests/register.png)
-### Screenshot 4: Dashboard
-![Chat Dashboard](assests/dashboard.png)
-### Screenshot 5: Chatroom
-![Chat Room](assests/chatroom.png)
-
-
-
 
 ---
 
@@ -180,6 +167,17 @@ cd frontend
 npm install
 npm run dev
 ```
+###  Home Screen
+![Home Page](assests/home.png)
+###  Login Screen
+![Login Page](assests/login.png)
+###  Register Screen
+![Register Page](assests/register.png)
+###  Dashboard
+![Chat Dashboard](assests/dashboard.png)
+###  Chatroom
+![Chat Room](assests/chatroom.png)
+
 
 ### 👩‍💻 Author
 ### **Devyani Gohil**
