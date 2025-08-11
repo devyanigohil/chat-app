@@ -85,3 +85,15 @@ html, body {
   color: #987c66;
   text-align: center;
 }
+
+.link {
+  color:inherit;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration: none;
+} 
+.link:hover {
+  color: #a45c3f;
+  text-decoration: none;
+  cursor: pointer;
+}

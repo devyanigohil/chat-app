@@ -29,7 +29,7 @@ function HomePage() {
       </div>
 
       <footer className="footer">
-        <p>Handcrafted with ❤️ by Devyani Gohil</p>
+        <p>Handcrafted with ❤️ by <a href="https://www.linkedin.com/in/devyani-gohil/" target="_blank" rel="noopener noreferrer" className='link'>Devyani Gohil</a></p>
       </footer>
     </div>
   );
