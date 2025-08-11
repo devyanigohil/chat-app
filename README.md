@@ -167,15 +167,21 @@ cd frontend
 npm install
 npm run dev
 ```
-###  Home Screen
+## 📸 Screenshots
+
+### **Home Screen**  
 ![Home Page](assests/home.png)
-###  Login Screen
+
+### **Login Screen**  
 ![Login Page](assests/login.png)
-###  Register Screen
+
+### **Register Screen**  
 ![Register Page](assests/register.png)
-###  Dashboard
+
+**Dashboard**  
 ![Chat Dashboard](assests/dashboard.png)
-###  Chatroom
+
+### **Chatroom**  
 ![Chat Room](assests/chatroom.png)
 
 
