@@ -1,5 +1,4 @@
 export const refreshAccessToken = async () => {
-  debugger
   const refreshToken = localStorage.getItem('refreshToken');
   if (!refreshToken) throw new Error('No refresh token');
 

@@ -42,6 +42,24 @@
   font-family: 'Georgia', serif;
   box-sizing: border-box;
 }
+/* 
+.password {
+  position: relative; /* For positioning the eye icon */
+  /* padding-right: "35px" ;
+}  */
+
+.login-field {
+  position: relative; /* For positioning the eye icon */
+}
+
+.login-field i{
+  position: absolute;
+  right: 10px;
+  top: 30%;
+  cursor: pointer;
+  transform: translate(-50%);
+  color:#d88c54;
+}
 
 /* Button styles */
 .login-btn {

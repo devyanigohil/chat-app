@@ -25,10 +25,14 @@ public class OtpService {
 
     public Boolean generateAndSendOtp(String toEmail) {
         String otp = generateOtp(6); 
-        String subject = "Your OTP Code";
-        String content = "Your OTP code is: " + otp;
-
+        String subject = "OTP for Signup";
+        String content = "Hey there, "+toEmail+"<br> Please use following OTP code to verify your Email:<br> <spna style='text-align:center;font-size: 4rem;'>" + otp;
+        content += "</span><br> This OTP is valid for 5 minutes.";
+        content+="<br><span style='color:red;'> Please do not share this OTP with anyone.";
+        content += " </span><br> If you did not request this, please ignore this email.</br>";
+        content += "<br>Thank you for using our service!";
         String result = emailSender.sendEmail(toEmail, subject, content, null);
+
         if (!result.equalsIgnoreCase("SUCCESS")) return false;
 
         OtpVerification otpVerification = new OtpVerification();

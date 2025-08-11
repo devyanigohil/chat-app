@@ -35,7 +35,7 @@ function ChatRoom(){
         .then(data => setMessages(data))
         .catch(err => console.error('Failed to fetch messages', err));
     }
-  }, []);
+  },[]);
 
   useEffect(() => {
     if (room && user) {
@@ -103,15 +103,20 @@ return (
 
     <div className="chatroom-container">
       <div className="chatroom-header">
+        
+       <div className="header-left">
         <h2>Room: {room?.name}</h2>
-        <h2>Welcome, {user}</h2>
+        <br/>
+        {room?.admin && (
+          <button className="chatroom-btn add-users" onClick={() => setShowInviteModal(true)}>
+            ➕ Add Users
+          </button>
+        )}
+      </div>
+      <h2>Welcome, {user}</h2>
       </div>
 
-      {room?.admin && (
-        <button className="chatroom-btn" onClick={() => setShowInviteModal(true)}>
-          ➕ Add Users
-        </button>
-      )}
+     
 
       {showInviteModal && (
         <InviteUsersModal roomId={room?.id} onClose={() => setShowInviteModal(false)} />

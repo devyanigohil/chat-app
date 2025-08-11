@@ -25,6 +25,9 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequest, Lo
         "  WHERE (fr.sender_id = ?3 OR fr.receiver_id = ?3) " +
         ")", nativeQuery = true)
     List<User> searchForFriendRequest(String query, String currentUsername, Long currentUserId);
+
+    @Query(value="select * from friend_request where handled=false and requested_at<(NOW() - INTERVAL '3 months') ",nativeQuery=true)
+    List<FriendRequest> findExpiredRequests();
    
 
 }

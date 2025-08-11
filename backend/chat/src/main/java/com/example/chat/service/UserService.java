@@ -15,6 +15,7 @@ import com.example.chat.mapper.UserMapper;
 import com.example.chat.model.User;
 import com.example.chat.repository.FriendRequestRepository;
 import com.example.chat.repository.UserRepository;
+import com.example.chat.util.EmailSender;
 
 @Service
 public class UserService {
@@ -22,11 +23,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final FriendRequestRepository friendRequestRepository;
+    private final EmailSender emailSender;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,FriendRequestRepository friendRequestRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+                            FriendRequestRepository friendRequestRepository, EmailSender emailSender) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.friendRequestRepository = friendRequestRepository;
+        this.emailSender = emailSender;
     }
 
     public String createUser(UserDTO userDTO){
@@ -45,6 +49,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRegisterDate(LocalDateTime.now());
         userRepository.save(user);
+        sendRegEmail(user.getEmail());
         return "User registered successfully";
     }
     
@@ -64,6 +69,16 @@ public class UserService {
                         map(UserMapper :: toDto)
                         .toList();
         
+    }
+
+    public void sendRegEmail(String email){
+        try {
+            String content = "Hello there,<br><p>Welcome to ChatConnect!</><br><br> We are excited to have you on board. If you have any questions, feel free to reach out.";
+              emailSender.sendEmail(email, "Welcome to ChatConnect",content,null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to send registration email");}
+      
     }
     
   

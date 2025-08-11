@@ -6,7 +6,6 @@ let stompClient = null;
   const room=JSON.parse(localStorage.getItem("room"));
 
 export const connect = async (onMessageReceived) => {
-  debugger
     let token = localStorage.getItem('token');
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));

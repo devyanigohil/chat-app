@@ -30,6 +30,7 @@
   display: flex;
   align-items: center;
   gap: 10px; /* spacing between input and button if both exist */
+  position: relative;
 }
 
 .register-input {
@@ -40,6 +41,15 @@
   background: #fffaf3;
   font-size: 1rem;
   box-sizing: border-box;
+}
+
+.register-field i{
+  position: absolute;
+  right: 10px;
+  top: 30%;
+  cursor: pointer;
+  transform: translate(-50%);
+  color:#d88c54;
 }
 
 

@@ -2,47 +2,53 @@
   background-color: #d5bfa3; /* warm olive beige */
   color: #4b3f2f;
   border: 1px solid #bfa47d;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 8px;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .accept-btn:hover {
   background-color: #cdb393;
+  transform: scale(1.05);
 }
 
 .reject-btn {
   background-color: #e6b0a8; /* warm terracotta-pink */
   color: #4b2d2d;
   border: 1px solid #d49a90;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 8px;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .reject-btn:hover {
   background-color: #dba49c;
+  transform: scale(1.05);
 }
 
 .close-btn {
   margin-top: 1rem;
   background-color: #f3e9dd;
-  color: #4a3d30;
+  color: #8a6037;
   border: 1px solid #dbc6ad;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 8px;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .close-btn:hover {
   background-color: #e8ddce;
+  transform: scale(1.05);
 }

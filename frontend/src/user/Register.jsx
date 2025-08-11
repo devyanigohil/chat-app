@@ -4,19 +4,32 @@ import * as yup from "yup";
 import axios from '../api/axiosInstance'; 
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye,faEyeSlash  } from "@fortawesome/free-solid-svg-icons";
 import './css/Register.css';
+
+const eye = <FontAwesomeIcon icon={faEye} />;
+const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} />;
+const passwordRules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const usernameRules = /^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+
+
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  username: yup.string().min(4, "Username must be at least 4 characters").required("Username is required"),
-  password: yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
-  otp: yup.string().length(6, "OTP must be 6 digits").required("OTP is required")
+  username: yup.string().matches(usernameRules, {message:"Invalid Username"}).required("Username is required"),
+  password: yup.string().matches(passwordRules,{message: "Password must be at least 8 characters, include uppercase, lowercase, number, and special character"}).required("Password is required"),
+  otp: yup.string().matches(/^\d{6}$/, "OTP must be 6 digits").required("OTP is required")
 });
 
 function Register() {
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  }
   const navigate = useNavigate();
 
   const {
@@ -123,11 +136,12 @@ function Register() {
 
           <div className="register-field">
             <input
-              className="register-input"
-              type="password"
+              className="register-input password"
+              type={passwordShown ? "text" : "password"}
               placeholder="Password"
               {...register("password")}
             />
+            <i onClick={togglePasswordVisiblity}>{passwordShown ? eye : eyeSlash}</i>
           </div>
             <p className="error-msg">{errors.password?.message}</p>
 

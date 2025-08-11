@@ -54,7 +54,7 @@ public class UserController {
            if (response.startsWith("An account with this email") || response.startsWith("Username already taken")) {
                return ResponseEntity.status(409).body(response);
            }
-                   return ResponseEntity.ok("User registered successfully");
+        return ResponseEntity.ok("User registered successfully");
 
         } catch (Exception e) {
            return ResponseEntity.status(409).body(e.getMessage()); 
